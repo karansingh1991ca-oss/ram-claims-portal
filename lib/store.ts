@@ -12,16 +12,8 @@ async function writeClaims(claims: RamClaim[]): Promise<void> {
 }
 
 export async function generateClaimId(): Promise<string> {
-  const claims = await readClaims();
-  const existing = new Set(claims.map((c) => c.claimId));
-
-  for (let attempt = 0; attempt < 50; attempt++) {
-    const suffix = String(Math.floor(1000 + Math.random() * 9000));
-    const id = `CLM-2026-${suffix}`;
-    if (!existing.has(id)) return id;
-  }
-
-  return `CLM-2026-${String(Date.now()).slice(-4)}`;
+  const suffix = String(Math.floor(1000 + Math.random() * 9000));
+  return `CLM-2026-${suffix}`;
 }
 
 export async function createClaim(input: {

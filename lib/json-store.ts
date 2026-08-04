@@ -6,12 +6,18 @@ function useBlobStorage(): boolean {
   return Boolean(process.env.BLOB_READ_WRITE_TOKEN && process.env.VERCEL);
 }
 
+function dataDir(): string {
+  if (process.env.VERCEL && !process.env.BLOB_READ_WRITE_TOKEN) {
+    return join("/tmp", "ram-claims-portal-data");
+  }
+  return join(process.cwd(), "data");
+}
+
 function localPath(key: string): string {
-  return join(process.cwd(), "data", key);
+  return join(dataDir(), key);
 }
 
 async function readLocalJson<T>(key: string, fallback: T): Promise<T> {
-  await mkdir(join(process.cwd(), "data"), { recursive: true });
   try {
     const raw = await readFile(localPath(key), "utf8");
     return JSON.parse(raw) as T;
@@ -21,7 +27,8 @@ async function readLocalJson<T>(key: string, fallback: T): Promise<T> {
 }
 
 async function writeLocalJson<T>(key: string, value: T): Promise<void> {
-  await mkdir(join(process.cwd(), "data"), { recursive: true });
+  const dir = dataDir();
+  await mkdir(dir, { recursive: true });
   await writeFile(localPath(key), `${JSON.stringify(value, null, 2)}\n`, "utf8");
 }
 

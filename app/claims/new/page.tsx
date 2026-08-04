@@ -1,39 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import ClaimForm from "./ClaimForm";
 
+function createClaimId(): string {
+  const suffix = String(Math.floor(1000 + Math.random() * 9000));
+  return `CLM-2026-${suffix}`;
+}
+
 export default function NewClaimPage() {
-  const [claimId, setClaimId] = useState<string | null>(null);
-  const [loadError, setLoadError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch("/api/claims/next-id")
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to generate claim ID");
-        return res.json() as Promise<{ claimId: string }>;
-      })
-      .then((data) => setClaimId(data.claimId))
-      .catch(() => setLoadError("Could not generate claim ID. Please refresh the page."));
-  }, []);
-
-  if (loadError) {
-    return (
-      <section>
-        <h1>Submit claim</h1>
-        <p style={{ color: "#dc2626" }}>{loadError}</p>
-      </section>
-    );
-  }
-
-  if (!claimId) {
-    return (
-      <section>
-        <h1>Submit claim</h1>
-        <p style={{ color: "#64748b" }}>Preparing form…</p>
-      </section>
-    );
-  }
+  const claimId = useMemo(() => createClaimId(), []);
 
   return (
     <section>
