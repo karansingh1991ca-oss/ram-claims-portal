@@ -11,6 +11,13 @@ npm run dev
 
 Open http://localhost:3002
 
+## Sign in
+
+The portal requires login before accessing any pages:
+
+- **Login ID:** `TestID`
+- **Password:** `TestPassword`
+
 ## Deploy to Vercel
 
 1. Import this repo on [vercel.com/new](https://vercel.com/new)
