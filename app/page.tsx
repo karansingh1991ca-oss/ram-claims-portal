@@ -1,0 +1,56 @@
+import Link from "next/link";
+
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ submitted?: string }>;
+}) {
+  const params = await searchParams;
+
+  return (
+    <section>
+      <h1>RAM Claims Portal</h1>
+      {params.submitted ? (
+        <div style={successBannerStyle} role="status">
+          Claim submitted successfully. View it under &quot;View submitted claims&quot;.
+        </div>
+      ) : null}
+      <p style={{ color: "#64748b" }}>
+        Submit warranty claims for RAM vehicle parts and review previously submitted claims.
+      </p>
+      <div style={{ display: "flex", gap: 16, marginTop: 24 }}>
+        <Link href="/claims/new" style={primaryBtn}>
+          Submit claims
+        </Link>
+        <Link href="/claims" style={secondaryBtn}>
+          View submitted claims
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+const successBannerStyle: React.CSSProperties = {
+  backgroundColor: "#dcfce7",
+  color: "#166534",
+  border: "1px solid #86efac",
+  borderRadius: 8,
+  padding: "12px 16px",
+  marginBottom: 16,
+};
+
+const primaryBtn: React.CSSProperties = {
+  background: "#1e3a5f",
+  color: "#fff",
+  padding: "12px 20px",
+  borderRadius: 8,
+  textDecoration: "none",
+};
+
+const secondaryBtn: React.CSSProperties = {
+  background: "#e2e8f0",
+  color: "#0f172a",
+  padding: "12px 20px",
+  borderRadius: 8,
+  textDecoration: "none",
+};
