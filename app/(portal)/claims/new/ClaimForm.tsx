@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { CLAIM_ITEMS, type ClaimItem } from "@/lib/schema";
 
 type Props = {
   claimId: string;
@@ -10,8 +9,9 @@ type Props = {
 
 export default function ClaimForm({ claimId }: Props) {
   const router = useRouter();
-  const [item, setItem] = useState<ClaimItem | "">("");
-  const [technicianNotes, setTechnicianNotes] = useState("");
+  const [itemName, setItemName] = useState("");
+  const [warrantyNumber, setWarrantyNumber] = useState("");
+  const [issueSummary, setIssueSummary] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
@@ -19,12 +19,16 @@ export default function ClaimForm({ claimId }: Props) {
     event.preventDefault();
     setError(null);
 
-    if (!item) {
-      setError("Please select an item.");
+    if (!itemName.trim()) {
+      setError("Item name is required.");
       return;
     }
-    if (!technicianNotes.trim()) {
-      setError("Technician notes are required.");
+    if (!warrantyNumber.trim()) {
+      setError("Warrenty number is required.");
+      return;
+    }
+    if (!issueSummary.trim()) {
+      setError("Issue summary is required.");
       return;
     }
 
@@ -36,8 +40,9 @@ export default function ClaimForm({ claimId }: Props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           claimId,
-          item,
-          technicianNotes: technicianNotes.trim(),
+          itemName: itemName.trim(),
+          warrantyNumber: warrantyNumber.trim(),
+          issueSummary: issueSummary.trim(),
         }),
       });
 
@@ -61,30 +66,29 @@ export default function ClaimForm({ claimId }: Props) {
       <label htmlFor="claimId">Claim ID</label>
       <input id="claimId" value={claimId} readOnly style={readOnlyInputStyle} tabIndex={-1} />
 
-      <label htmlFor="item">Item</label>
-      <select
-        id="item"
-        value={item}
-        onChange={(e) => setItem(e.target.value as ClaimItem)}
+      <label htmlFor="itemName">Item name</label>
+      <input
+        id="itemName"
+        value={itemName}
+        onChange={(e) => setItemName(e.target.value)}
         required
-        style={selectStyle}
-      >
-        <option value="">Select an item…</option>
-        {CLAIM_ITEMS.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
+      />
 
-      <label htmlFor="technicianNotes">Technician notes</label>
+      <label htmlFor="warrantyNumber">Warrenty number</label>
+      <input
+        id="warrantyNumber"
+        value={warrantyNumber}
+        onChange={(e) => setWarrantyNumber(e.target.value)}
+        required
+      />
+
+      <label htmlFor="issueSummary">Issue summary</label>
       <textarea
-        id="technicianNotes"
-        value={technicianNotes}
-        onChange={(e) => setTechnicianNotes(e.target.value)}
+        id="issueSummary"
+        value={issueSummary}
+        onChange={(e) => setIssueSummary(e.target.value)}
         required
         rows={5}
-        placeholder="Describe the issue, repair performed, parts used, labor hours…"
       />
 
       <div style={actionsStyle}>
@@ -115,13 +119,6 @@ const readOnlyInputStyle: React.CSSProperties = {
   border: "1px solid #cbd5e1",
   padding: "8px 10px",
   borderRadius: 6,
-};
-
-const selectStyle: React.CSSProperties = {
-  padding: "8px 10px",
-  borderRadius: 6,
-  border: "1px solid #cbd5e1",
-  fontSize: 16,
 };
 
 const actionsStyle: React.CSSProperties = {

@@ -1,14 +1,25 @@
-import type { ClaimItem, RamClaim } from "@/lib/schema";
+import type { RamClaim } from "@/lib/schema";
 import { readJsonStore, writeJsonStore } from "@/lib/json-store";
 
 const CLAIMS_KEY = "claims.json";
 
 export async function readClaims(): Promise<RamClaim[]> {
-  return readJsonStore<RamClaim[]>(CLAIMS_KEY, []);
+  const claims = await readJsonStore<RamClaim[]>(CLAIMS_KEY, []);
+  return claims.map(normalizeClaim);
 }
 
 async function writeClaims(claims: RamClaim[]): Promise<void> {
   await writeJsonStore(CLAIMS_KEY, claims);
+}
+
+function normalizeClaim(raw: RamClaim & { item?: string; technicianNotes?: string }): RamClaim {
+  return {
+    claimId: raw.claimId,
+    itemName: raw.itemName ?? raw.item ?? "",
+    warrantyNumber: raw.warrantyNumber ?? "",
+    issueSummary: raw.issueSummary ?? raw.technicianNotes ?? "",
+    submittedAt: raw.submittedAt,
+  };
 }
 
 export async function generateClaimId(): Promise<string> {
@@ -18,8 +29,9 @@ export async function generateClaimId(): Promise<string> {
 
 export async function createClaim(input: {
   claimId: string;
-  item: ClaimItem;
-  technicianNotes: string;
+  itemName: string;
+  warrantyNumber: string;
+  issueSummary: string;
 }): Promise<RamClaim> {
   const claims = await readClaims();
   if (claims.some((c) => c.claimId === input.claimId)) {
@@ -28,8 +40,9 @@ export async function createClaim(input: {
 
   const claim: RamClaim = {
     claimId: input.claimId,
-    item: input.item,
-    technicianNotes: input.technicianNotes,
+    itemName: input.itemName,
+    warrantyNumber: input.warrantyNumber,
+    issueSummary: input.issueSummary,
     submittedAt: new Date().toISOString(),
   };
 

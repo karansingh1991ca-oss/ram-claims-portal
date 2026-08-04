@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { createClaim, readClaims } from "@/lib/store";
-import { CLAIM_ITEMS, type ClaimItem } from "@/lib/schema";
 
 export async function GET() {
   const claims = await readClaims();
@@ -10,26 +9,24 @@ export async function GET() {
 export async function POST(request: Request) {
   const body = (await request.json()) as {
     claimId?: string;
-    item?: string;
-    technicianNotes?: string;
+    itemName?: string;
+    warrantyNumber?: string;
+    issueSummary?: string;
   };
 
-  if (!body.claimId || !body.item || !body.technicianNotes) {
+  if (!body.claimId || !body.itemName || !body.warrantyNumber || !body.issueSummary) {
     return NextResponse.json(
-      { error: "claimId, item, and technicianNotes are required" },
+      { error: "claimId, itemName, warrantyNumber, and issueSummary are required" },
       { status: 400 },
     );
-  }
-
-  if (!CLAIM_ITEMS.includes(body.item as ClaimItem)) {
-    return NextResponse.json({ error: "Invalid item selection" }, { status: 400 });
   }
 
   try {
     const claim = await createClaim({
       claimId: body.claimId,
-      item: body.item as ClaimItem,
-      technicianNotes: body.technicianNotes,
+      itemName: body.itemName.trim(),
+      warrantyNumber: body.warrantyNumber.trim(),
+      issueSummary: body.issueSummary.trim(),
     });
     return NextResponse.json({ claim }, { status: 201 });
   } catch (err) {

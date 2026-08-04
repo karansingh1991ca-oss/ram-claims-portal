@@ -24,11 +24,8 @@ The portal requires login before accessing any pages:
 2. Add **Blob** storage so claims persist on serverless
 3. Redeploy
 
-## Claim items
+## Claim fields
 
-- Clutch plate
-- Wipers
-- Tail Light
-- Head light
-- Tyres
-- Windsheild
+- Item name
+- Warrenty number
+- Issue summary

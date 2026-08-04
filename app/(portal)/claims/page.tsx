@@ -16,8 +16,9 @@ export default async function ClaimsPage() {
           <thead>
             <tr>
               <th>Claim ID</th>
-              <th>Item</th>
-              <th>Technician notes</th>
+              <th>Item name</th>
+              <th>Warrenty number</th>
+              <th>Issue summary</th>
               <th>Submitted</th>
             </tr>
           </thead>
@@ -25,8 +26,9 @@ export default async function ClaimsPage() {
             {claims.map((claim) => (
               <tr key={claim.claimId}>
                 <td>{claim.claimId}</td>
-                <td>{claim.item}</td>
-                <td style={{ maxWidth: 360 }}>{claim.technicianNotes}</td>
+                <td>{claim.itemName}</td>
+                <td>{claim.warrantyNumber}</td>
+                <td style={{ maxWidth: 320 }}>{claim.issueSummary}</td>
                 <td>{new Date(claim.submittedAt).toLocaleString()}</td>
               </tr>
             ))}
