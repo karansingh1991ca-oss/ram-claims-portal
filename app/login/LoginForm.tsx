@@ -60,7 +60,7 @@ export default function LoginForm({ redirectTo }: Props) {
         required
       />
 
-      <button type="submit" disabled={loading} style={submitBtnStyle}>
+      <button type="submit" id="submitLogin" disabled={loading} style={submitBtnStyle}>
         {loading ? "Signing in…" : "Sign in"}
       </button>
 
