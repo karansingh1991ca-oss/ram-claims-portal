@@ -12,11 +12,13 @@ async function writeClaims(claims: RamClaim[]): Promise<void> {
   await writeJsonStore(CLAIMS_KEY, claims);
 }
 
-function normalizeClaim(raw: RamClaim & { item?: string; technicianNotes?: string }): RamClaim {
+function normalizeClaim(
+  raw: RamClaim & { item?: string; technicianNotes?: string; warrantyNumber?: string },
+): RamClaim {
   return {
     claimId: raw.claimId,
     itemName: raw.itemName ?? raw.item ?? "",
-    warrantyNumber: raw.warrantyNumber ?? "",
+    serialNumber: raw.serialNumber ?? raw.warrantyNumber ?? "",
     issueSummary: raw.issueSummary ?? raw.technicianNotes ?? "",
     submittedAt: raw.submittedAt,
   };
@@ -30,7 +32,7 @@ export async function generateClaimId(): Promise<string> {
 export async function createClaim(input: {
   claimId: string;
   itemName: string;
-  warrantyNumber: string;
+  serialNumber: string;
   issueSummary: string;
 }): Promise<RamClaim> {
   const claims = await readClaims();
@@ -41,7 +43,7 @@ export async function createClaim(input: {
   const claim: RamClaim = {
     claimId: input.claimId,
     itemName: input.itemName,
-    warrantyNumber: input.warrantyNumber,
+    serialNumber: input.serialNumber,
     issueSummary: input.issueSummary,
     submittedAt: new Date().toISOString(),
   };

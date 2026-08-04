@@ -10,13 +10,13 @@ export async function POST(request: Request) {
   const body = (await request.json()) as {
     claimId?: string;
     itemName?: string;
-    warrantyNumber?: string;
+    serialNumber?: string;
     issueSummary?: string;
   };
 
-  if (!body.claimId || !body.itemName || !body.warrantyNumber || !body.issueSummary) {
+  if (!body.claimId || !body.itemName || !body.serialNumber || !body.issueSummary) {
     return NextResponse.json(
-      { error: "claimId, itemName, warrantyNumber, and issueSummary are required" },
+      { error: "claimId, itemName, serialNumber, and issueSummary are required" },
       { status: 400 },
     );
   }
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     const claim = await createClaim({
       claimId: body.claimId,
       itemName: body.itemName.trim(),
-      warrantyNumber: body.warrantyNumber.trim(),
+      serialNumber: body.serialNumber.trim(),
       issueSummary: body.issueSummary.trim(),
     });
     return NextResponse.json({ claim }, { status: 201 });

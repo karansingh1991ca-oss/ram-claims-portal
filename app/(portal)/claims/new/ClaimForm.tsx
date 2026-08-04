@@ -10,7 +10,7 @@ type Props = {
 export default function ClaimForm({ claimId }: Props) {
   const router = useRouter();
   const [itemName, setItemName] = useState("");
-  const [warrantyNumber, setWarrantyNumber] = useState("");
+  const [serialNumber, setSerialNumber] = useState("");
   const [issueSummary, setIssueSummary] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
@@ -23,8 +23,8 @@ export default function ClaimForm({ claimId }: Props) {
       setError("Item name is required.");
       return;
     }
-    if (!warrantyNumber.trim()) {
-      setError("Warrenty number is required.");
+    if (!serialNumber.trim()) {
+      setError("Serial number is required.");
       return;
     }
     if (!issueSummary.trim()) {
@@ -41,7 +41,7 @@ export default function ClaimForm({ claimId }: Props) {
         body: JSON.stringify({
           claimId,
           itemName: itemName.trim(),
-          warrantyNumber: warrantyNumber.trim(),
+          serialNumber: serialNumber.trim(),
           issueSummary: issueSummary.trim(),
         }),
       });
@@ -74,11 +74,11 @@ export default function ClaimForm({ claimId }: Props) {
         required
       />
 
-      <label htmlFor="warrantyNumber">Warrenty number</label>
+      <label htmlFor="serialNumber">Serial number</label>
       <input
-        id="warrantyNumber"
-        value={warrantyNumber}
-        onChange={(e) => setWarrantyNumber(e.target.value)}
+        id="serialNumber"
+        value={serialNumber}
+        onChange={(e) => setSerialNumber(e.target.value)}
         required
       />
 

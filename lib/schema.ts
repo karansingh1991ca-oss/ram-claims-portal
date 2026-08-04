@@ -1,7 +1,7 @@
 export type RamClaim = {
   claimId: string;
   itemName: string;
-  warrantyNumber: string;
+  serialNumber: string;
   issueSummary: string;
   submittedAt: string;
 };

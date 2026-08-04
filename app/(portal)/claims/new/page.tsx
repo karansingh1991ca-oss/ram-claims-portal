@@ -14,7 +14,7 @@ export default function NewClaimPage() {
   return (
     <section>
       <h1>Submit claim</h1>
-      <p style={{ color: "#64748b" }}>Enter the item name, warrenty number, and issue summary.</p>
+      <p style={{ color: "#64748b" }}>Enter the item name, serial number, and issue summary.</p>
       <ClaimForm claimId={claimId} />
     </section>
   );

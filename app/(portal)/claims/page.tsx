@@ -17,7 +17,7 @@ export default async function ClaimsPage() {
             <tr>
               <th>Claim ID</th>
               <th>Item name</th>
-              <th>Warrenty number</th>
+              <th>Serial number</th>
               <th>Issue summary</th>
               <th>Submitted</th>
             </tr>
@@ -27,7 +27,7 @@ export default async function ClaimsPage() {
               <tr key={claim.claimId}>
                 <td>{claim.claimId}</td>
                 <td>{claim.itemName}</td>
-                <td>{claim.warrantyNumber}</td>
+                <td>{claim.serialNumber}</td>
                 <td style={{ maxWidth: 320 }}>{claim.issueSummary}</td>
                 <td>{new Date(claim.submittedAt).toLocaleString()}</td>
               </tr>

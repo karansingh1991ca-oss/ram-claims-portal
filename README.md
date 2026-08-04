@@ -27,5 +27,5 @@ The portal requires login before accessing any pages:
 ## Claim fields
 
 - Item name
-- Warrenty number
+- Serial number
 - Issue summary
