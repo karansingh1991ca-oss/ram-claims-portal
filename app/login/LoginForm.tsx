@@ -48,7 +48,6 @@ export default function LoginForm({ redirectTo }: Props) {
         onChange={(e) => setLoginId(e.target.value)}
         autoComplete="username"
         required
-        placeholder="TestID"
       />
 
       <label htmlFor="password">Password</label>
@@ -59,7 +58,6 @@ export default function LoginForm({ redirectTo }: Props) {
         onChange={(e) => setPassword(e.target.value)}
         autoComplete="current-password"
         required
-        placeholder="TestPassword"
       />
 
       <button type="submit" disabled={loading} style={submitBtnStyle}>
