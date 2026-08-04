@@ -5,7 +5,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
     <>
       <header style={headerStyle}>
         <div style={innerStyle}>
-          <strong>RAM Claims Portal</strong>
+          <strong>Warrenty Claim Portal</strong>
           <nav style={navStyle}>
             <a href="/" style={navLinkStyle}>
               Home

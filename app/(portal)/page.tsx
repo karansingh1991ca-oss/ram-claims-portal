@@ -9,14 +9,14 @@ export default async function HomePage({
 
   return (
     <section>
-      <h1>RAM Claims Portal</h1>
+      <h1>Warrenty Claim Portal</h1>
       {params.submitted ? (
         <div style={successBannerStyle} role="status">
           Claim submitted successfully. View it under &quot;View submitted claims&quot;.
         </div>
       ) : null}
       <p style={{ color: "#64748b" }}>
-        Submit warranty claims for RAM vehicle parts and review previously submitted claims.
+        Submit warrenty claims and review previously submitted claims.
       </p>
       <div style={{ display: "flex", gap: 16, marginTop: 24 }}>
         <Link href="/claims/new" style={primaryBtn}>

@@ -9,7 +9,7 @@ export default async function LoginPage({
 
   return (
     <>
-      <div style={brandBarStyle}>RAM Claims Portal</div>
+      <div style={brandBarStyle}>Warrenty Claim Portal</div>
       <h1 style={{ margin: "0 0 8px", fontSize: 22 }}>Sign in</h1>
       <p style={{ margin: "0 0 24px", color: "#64748b" }}>
         Enter your login ID and password to access the portal.

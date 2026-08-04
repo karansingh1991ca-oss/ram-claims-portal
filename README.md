@@ -1,6 +1,6 @@
-# RAM Claims Portal
+# Warrenty Claim Portal
 
-Submit and view RAM vehicle warranty claims.
+Submit and view warrenty claims.
 
 ## Local development
 
