@@ -40,17 +40,19 @@ const successBannerStyle: React.CSSProperties = {
 };
 
 const primaryBtn: React.CSSProperties = {
-  background: "#1e3a5f",
-  color: "#fff",
+  background: "#000000",
+  color: "#ffffff",
   padding: "12px 20px",
   borderRadius: 8,
   textDecoration: "none",
+  border: "1px solid #000000",
 };
 
 const secondaryBtn: React.CSSProperties = {
-  background: "#e2e8f0",
-  color: "#0f172a",
+  background: "#000000",
+  color: "#ffffff",
   padding: "12px 20px",
   borderRadius: 8,
   textDecoration: "none",
+  border: "1px solid #000000",
 };

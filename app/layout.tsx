@@ -6,9 +6,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div style={innerStyle}>
             <strong>RAM Claims Portal</strong>
             <nav style={navStyle}>
-              <a href="/">Home</a>
-              <a href="/claims/new">Submit claim</a>
-              <a href="/claims">View claims</a>
+              <a href="/" style={navLinkStyle}>Home</a>
+              <a href="/claims/new" style={navLinkStyle}>Submit claim</a>
+              <a href="/claims" style={navLinkStyle}>View claims</a>
             </nav>
           </div>
         </header>
@@ -19,10 +19,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 
 const headerStyle: React.CSSProperties = {
-  background: "#1e3a5f",
-  color: "#f8fafc",
+  background: "#000000",
+  color: "#ffffff",
   padding: "12px 24px",
-  borderBottom: "1px solid #334155",
+  borderBottom: "1px solid #333333",
 };
 
 const innerStyle: React.CSSProperties = {
@@ -33,11 +33,17 @@ const innerStyle: React.CSSProperties = {
   alignItems: "center",
   gap: 16,
   flexWrap: "wrap",
+  color: "#ffffff",
 };
 
 const navStyle: React.CSSProperties = {
   display: "flex",
   gap: 16,
+};
+
+const navLinkStyle: React.CSSProperties = {
+  color: "#ffffff",
+  textDecoration: "none",
 };
 
 const mainStyle: React.CSSProperties = {

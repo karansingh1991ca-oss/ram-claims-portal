@@ -88,10 +88,10 @@ export default function ClaimForm({ claimId }: Props) {
       />
 
       <div style={actionsStyle}>
-        <button type="button" onClick={() => router.push("/")} disabled={saving}>
+        <button type="button" onClick={() => router.push("/")} disabled={saving} style={cancelBtnStyle}>
           Cancel
         </button>
-        <button type="submit" id="submitClaim" disabled={saving}>
+        <button type="submit" id="submitClaim" disabled={saving} style={submitBtnStyle}>
           {saving ? "Submitting…" : "Submit claim"}
         </button>
       </div>
@@ -128,4 +128,24 @@ const actionsStyle: React.CSSProperties = {
   display: "flex",
   gap: 12,
   marginTop: 12,
+};
+
+const submitBtnStyle: React.CSSProperties = {
+  background: "#000000",
+  color: "#ffffff",
+  border: "1px solid #000000",
+  borderRadius: 8,
+  padding: "10px 20px",
+  cursor: "pointer",
+  fontSize: 16,
+};
+
+const cancelBtnStyle: React.CSSProperties = {
+  background: "#000000",
+  color: "#ffffff",
+  border: "1px solid #000000",
+  borderRadius: 8,
+  padding: "10px 20px",
+  cursor: "pointer",
+  fontSize: 16,
 };
